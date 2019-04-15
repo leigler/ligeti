@@ -3,5 +3,5 @@
 		<style>.cls-1{fill:#00e733;}</style>
 	</defs>
 	<title>ligeti-Artboard 1</title>
-	<path class="cls-1" d="M1,443S71,228,305,228c288,0,245,287,416,287s313-183,526-183,194,129,194,129V901H1Z"/>
+	<path class="cls-1" id="first_path" d="M1,443S71,228,305,228c288,0,245,287,416,287s313-183,526-183,194,129,194,129V901H1Z"/>
 </svg>
