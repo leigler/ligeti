@@ -1,25 +1,73 @@
 *{
 	padding: 0;
 	margin: 0;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
 }
 
 body, html{
 	background-color: black;
 	font-size: 18px;
-	font-family: Times;
+	font-family: 'Lazurski-Regular', 'Times New Roman', TimesNewRoman, Times, serif;
 }
 
 nav{
 	display: none;
-	position: sticky;
-	position: -webkit-sticky;
+	position: fixed;
+	width: 100%;
 	top: 0;
-	background-color: white;
+	background: linear-gradient(rgba(255,255,255,1), rgba(255,255,255,1), rgba(255,255,255,1), rgba(255,255,255,1));
 	color: black;
 	box-sizing: border-box;
 	padding-bottom: 0.5rem;
 	padding-top: 0.5rem;
 	z-index: 10;
+	height: 3rem;
+	transition: background 0.5s ease-in, height 0.5s ease-in;
+
+
+}
+
+nav.open{
+	height: 100vh;
+	background: linear-gradient(rgba(255,255,255,1), rgba(255,255,255,0.85), rgba(255,255,255,0.5), rgba(255,255,255,0));
+}
+
+nav ul{
+	list-style: none;
+	width: 100%;
+}
+
+nav li{
+	pointer-events: none;
+	box-sizing: border-box;
+	padding-left: 1rem;
+	padding-right: 1rem;
+	margin-bottom: 0.25rem;
+}
+
+nav.open li{
+	pointer-events: initial;
+}
+
+nav li a{
+	box-sizing: border-box;
+	text-decoration: none;
+	overflow: hidden;
+	height: 0.25rem;
+	line-height: 1.7rem;
+	padding-top: 0.25rem;
+	padding-left: 0.5rem;
+	padding-right: 0.5rem;
+	color: black;
+	background-color: black;
+	display: block;
+	transition: height 0.5s ease-in, color 0.5s ease-in;
+}
+
+nav.open li a{
+	height: 1.75rem;
+	color: white;
 }
 
 @media(max-width: 768px){
@@ -28,13 +76,29 @@ nav{
 	}
 }
 
+
+
 section{
 	position: relative;
 	display: inline-block;
 	width: 33%;
 	vertical-align: top;
 	box-sizing: border-box;
-	padding: 0.25rem;
+	padding: 0.5rem;
+}
+
+section h1, section p, section ul{
+	font-size: 1.25rem;
+	line-height: 1.7rem;
+	margin-bottom: 0.5rem;
+}
+
+section h1{
+	margin-bottom: 1rem;
+}
+
+section ul{
+	list-style: none;
 }
 
 section *{
@@ -42,11 +106,49 @@ section *{
 	color: white;
 }
 
+section * a{
+	display: inline-block;
+	padding-right: 0.25rem;
+	padding-left: 0.25rem;
+	line-height: 1.5rem;
+	text-decoration: none;
+	background-color: white;
+	color: black;
+}
+
+@media(any-hover: hover){
+	section a:hover{
+		mix-blend-mode: exclusion;
+	}
+}
+
+#upcoming_concerts li:before{
+	content: "";
+	box-sizing: border-box;
+	display: block;
+	width: 1rem;
+	height: 1rem;
+	margin-top: 0.5rem;
+	margin-bottom: 0.25rem;
+
+	border-radius: 1rem;
+	border: solid 0.35rem white;
+}
+
+
 @media(max-width: 768px){
+	#lukas_ligeti{
+		padding-top: 7rem;
+	}
+
 	section{
 		display: block;
 		width: 100%;
 		padding: 1rem;
+	}
+
+	section:last-of-type{
+		padding-bottom: 12rem;
 	}
 }
 
@@ -58,5 +160,5 @@ section *{
 	top: 0;
 	left: 0;
 	z-index: 0;
-	background-color: red;
+	
 }

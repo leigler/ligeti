@@ -11,34 +11,35 @@ Site.ambientBackground = function(){
 			var viewBox = s.attr("viewBox"),
 					paths = arc.selectAll("path");
 
-			var loadAndSlide = function(paths, speed, index){
+			var mostRecentColorIndex = 0;
+
+			var loadAndSlide = function(speed, index){
 
 				var thisPath = paths[index];
-				var colors = ["#692E5C", "#8BDEFF", "#FFFA2E", "#FF5CE5", "#692EA5", "#A2004D", "#692EFF", "#00E733"]
+				var colors = ["#340053", "#004F2A", "#A67B00", "#34339D", "#AC0000", "#00014F", "#6D0000", "#2B00AC"]
 
-				thisPath.transform('translate(0 900)').attr({ fill: colors[index] });
+				var currentPath = s.path(thisPath.attr("d"))
+				var randomColorIndex = Math.round(Math.random()*(colors.length-1));
 
-				s.append(thisPath)
+				randomColorIndex = (randomColorIndex == mostRecentColorIndex) ? (colors.length - 1) - randomColorIndex : randomColorIndex;
+
+				currentPath.transform('translate(0 900)').attr({ fill: colors[randomColorIndex] });
+				mostRecentColorIndex = randomColorIndex;
+
+				s.append(currentPath)
 				// console.log(Snap.parsePathString(thisPath))
-				thisPath.animate({
+				currentPath.animate({
 					transform: 'translate(0 -900)'
 				}, speed, mina.linear, function(){
-					console.log(thisPath.attr("class"))
-					// remove path?
-					thisPath.remove()
-					var randomPath = Math.round(Math.random()*(paths.length-1));
-					loadAndSlide(paths, speed, randomPath)
+					currentPath.remove()
 				})
-
 			}
-			
-			// bugs include if it's the same class on both animations, it deletes itself
-			// also need to figure out how to allow for consistent overlap (negative transform)
-
-			loadAndSlide(paths, 4000, 0)
-			// setTimeout(function(){
-			// 	loadAndSlide(paths, 4000, 0)				
-			// }, 2000)
+			loadAndSlide(30000, 0)
+			setInterval(function(){
+				var randomPath = Math.round(Math.random()*(paths.length-1));
+				
+				loadAndSlide(30000 + Math.round(Math.random()*4000), randomPath)
+			}, 4000)
 
 		})
 	}
@@ -49,10 +50,29 @@ Site.ambientBackground = function(){
 
 
 Site.menu = function(){
-	console.log("menu")
+	
+	$("nav").on('click', function(){
+
+		$(this).toggleClass("open")
+
+	})
+
+	$("a.menu_items").on('click', function(event){
+		event.preventDefault();
+		var target = $(this).attr("href");
+		var targetOffset = $(target).offset().top;
+
+		$("body, html").delay(500).animate({
+			scrollTop: targetOffset - 75
+		}, 1000)
+
+
+	})
+
 }
 
 window.onload = function(){
 	console.log("Lukas Ligeti\nSite by Lukas Eigler-Harding")
 	Site.ambientBackground()
+	Site.menu()
 }
