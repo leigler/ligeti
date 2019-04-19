@@ -3,7 +3,7 @@ var Site = {};
 Site.ambientBackground = function(){
 	var s = Snap("#background");
 	
-	var svgArcs = ["/assets/arcs/ligeti-arc-all.svg"];
+	var svgArcs = ["assets/arcs/ligeti-arc-all.svg"];
 
 	var animationCycle = function(svgArc){
 		Snap.load(svgArc, function(arc){
